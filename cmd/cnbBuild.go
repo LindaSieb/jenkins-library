@@ -657,6 +657,9 @@ func runCnbBuild(config *cnbBuildOptions, cnbTelemetry *cnbBuildTelemetry, utils
 		}
 	}
 
+	_ = utils.RunExecutable("ls", "-lah")
+	_ = utils.RunExecutable("cat", ".docker/config.json")
+
 	creatorArgs = append(creatorArgs, fmt.Sprintf("%s:%s", containerImage, targetImage.ContainerImageTag))
 	err = utils.RunExecutable(creatorPath, creatorArgs...)
 	if err != nil {
