@@ -658,7 +658,8 @@ func runCnbBuild(config *cnbBuildOptions, cnbTelemetry *cnbBuildTelemetry, utils
 	}
 
 	_ = utils.RunExecutable("env")
-	_ = utils.RunExecutable("ls", "-lah /home/vsts/work/1/s")
+	_ = utils.RunExecutable("pwd")
+	_ = utils.RunExecutable("ls", "-lah", "/home/vsts/work/1/s")
 	_ = utils.RunExecutable("cat", "/home/vsts/work/1/s/.docker/config.json")
 
 	creatorArgs = append(creatorArgs, fmt.Sprintf("%s:%s", containerImage, targetImage.ContainerImageTag))
