@@ -7,6 +7,9 @@ import groovy.transform.Field
 void call(Map parameters = [:]) {
     final script = checkScript(this, parameters) ?: this
     String piperGoPath = parameters?.piperGoPath ?: './piper'
+
+    script.sh(returnStdout: false, script: "${piperGoPath} readPipelineEnv")
+    
     def output = script.sh(returnStdout: true, script: "${piperGoPath} readPipelineEnv")
     Map cpeMap = script.readJSON(text: output)
     script?.commonPipelineEnvironment?.setCPEMap(script, cpeMap)
