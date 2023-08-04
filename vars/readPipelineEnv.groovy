@@ -3,7 +3,6 @@ import static com.sap.piper.Prerequisites.checkScript
 import groovy.transform.Field
 
 @Field def STEP_NAME = getClass().getName()
-@Field String METADATA_FILE = 'metadata/readPipelineEnv.yaml'
 
 void call(Map parameters = [:]) {
     final script = checkScript(this, parameters) ?: this

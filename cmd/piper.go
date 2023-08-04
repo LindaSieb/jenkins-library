@@ -346,12 +346,18 @@ func PrepareConfig(cmd *cobra.Command, metadata *config.StepData, stepName strin
 	// add vault credentials so that configuration can be fetched from vault
 	if GeneralConfig.VaultRoleID == "" {
 		GeneralConfig.VaultRoleID = os.Getenv("PIPER_vaultAppRoleID")
+		// ***
+		fmt.Println("===PIPER_vaultAppRoleID:", GeneralConfig.VaultRoleID)
 	}
 	if GeneralConfig.VaultRoleSecretID == "" {
 		GeneralConfig.VaultRoleSecretID = os.Getenv("PIPER_vaultAppRoleSecretID")
+		// ***
+		fmt.Println("===PIPER_vaultAppRoleSecretID:", GeneralConfig.VaultRoleSecretID)
 	}
 	if GeneralConfig.VaultToken == "" {
 		GeneralConfig.VaultToken = os.Getenv("PIPER_vaultToken")
+		// ***
+		fmt.Println("===PIPER_vaultToken:", GeneralConfig.VaultToken)
 	}
 	myConfig.SetVaultCredentials(GeneralConfig.VaultRoleID, GeneralConfig.VaultRoleSecretID, GeneralConfig.VaultToken)
 

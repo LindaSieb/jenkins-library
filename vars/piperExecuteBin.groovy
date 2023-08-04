@@ -83,7 +83,9 @@ void call(Map parameters = [:], String stepName, String metadataFile, List crede
                                 jenkinsUtils.handleStepResults(stepName, failOnMissingReports, failOnMissingLinks)
                             }
                         } finally {
-                           readPipelineEnv(script: script, piperGoPath: piperGoPath)
+                            credentialWrapper(config, credentialInfo) {
+                                readPipelineEnv(script: script, piperGoPath: piperGoPath)
+                            }  
                         }
                     } finally {
                         InfluxData.readFromDisk(script)
