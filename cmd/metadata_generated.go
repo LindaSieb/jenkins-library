@@ -101,6 +101,7 @@ func GetAllStepMetadata() map[string]config.StepData {
 		"pipelineCreateScanSummary":                 pipelineCreateScanSummaryMetadata(),
 		"protecodeExecuteScan":                      protecodeExecuteScanMetadata(),
 		"pythonBuild":                               pythonBuildMetadata(),
+		"readPipelineEnv":                           readPipelineEnvMetadata(),
 		"shellExecute":                              shellExecuteMetadata(),
 		"sonarExecuteScan":                          sonarExecuteScanMetadata(),
 		"terraformExecute":                          terraformExecuteMetadata(),

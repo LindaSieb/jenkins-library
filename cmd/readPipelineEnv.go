@@ -131,7 +131,7 @@ func readPipelineEnvMetadata() config.StepData {
 		Metadata: config.StepMetadata{
 			Name:        "readPipelineEnv",
 			Aliases:     []config.Alias{},
-			Description: "Step executes defined script",
+			Description: "description",
 		},
 		Spec: config.StepSpec{
 			Inputs: config.StepInputs{
