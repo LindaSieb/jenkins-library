@@ -178,6 +178,10 @@ void credentialWrapper(config, List credentialInfo, body) {
         def creds = []
         def sshCreds = []
         credentialInfo.each { cred ->
+
+            // *** 
+            echo "===cred: ${cred}"
+
             def credentialsId
             if (cred.resolveCredentialsId == false) {
                 credentialsId = cred.id
@@ -185,6 +189,8 @@ void credentialWrapper(config, List credentialInfo, body) {
                 credentialsId = config[cred.id]
             }
             if (credentialsId) {
+                // ***
+                echo "===cred.type: ${cred.type}"
                 switch (cred.type) {
                     case "file":
                         creds.add(file(credentialsId: credentialsId, variable: cred.env[0]))
@@ -202,6 +208,12 @@ void credentialWrapper(config, List credentialInfo, body) {
                         error("invalid credential type: ${cred.type}")
                 }
             }
+
+            // ***
+            def appRoleID = System.getenv("PIPER_vaultAppRoleID")
+            def appRoleSecretID = System.getenv("PIPER_vaultAppRoleSecretID")
+            echo "===appRoleID: ${appRoleID}"
+            echo "===appRoleSecretID: ${appRoleSecretID}"
         }
 
         // remove credentialIds that were probably defaulted and which are not present in jenkins
@@ -221,7 +233,17 @@ void credentialWrapper(config, List credentialInfo, body) {
                 body()
             }
         }
+        // ***
+        def appRoleID = System.getenv("PIPER_vaultAppRoleID")
+        def appRoleSecretID = System.getenv("PIPER_vaultAppRoleSecretID")
+        echo "===appRoleID: ${appRoleID}"
+        echo "===appRoleSecretID: ${appRoleSecretID}"
     } else {
+        // ***
+        def appRoleID = System.getenv("PIPER_vaultAppRoleID")
+        def appRoleSecretID = System.getenv("PIPER_vaultAppRoleSecretID")
+        echo "===appRoleID: ${appRoleID}"
+        echo "===appRoleSecretID: ${appRoleSecretID}"
         body()
     }
 }
@@ -249,6 +271,9 @@ boolean containsVaultConfig(Map config) {
 
 // Injects vaultCredentials if steps supports resolving parameters from vault
 List handleVaultCredentials(config, List credentialInfo) {
+    // ***
+    echo "===config: ${config}"
+
     if (config.containsKey('vaultAppRoleTokenCredentialsId') && config.containsKey('vaultAppRoleSecretTokenCredentialsId')) {
         credentialInfo += [[type: 'token', id: 'vaultAppRoleTokenCredentialsId', env: ['PIPER_vaultAppRoleID']],
                             [type: 'token', id: 'vaultAppRoleSecretTokenCredentialsId', env: ['PIPER_vaultAppRoleSecretID']]]
@@ -257,6 +282,9 @@ List handleVaultCredentials(config, List credentialInfo) {
     if (config.containsKey('vaultTokenCredentialsId')) {
         credentialInfo += [[type: 'token', id: 'vaultTokenCredentialsId', env: ['PIPER_vaultToken']]]
     }
+
+    // ***
+    echo "===credentialInfo: ${credentialInfo}"
 
     return credentialInfo
 }
