@@ -50,9 +50,6 @@ func addReadPipelineEnvFlags1(cmd *cobra.Command, stepConfig *readPipelineEnvOpt
 // }
 
 func readPipelineEnv(config readPipelineEnvOptions, _ *telemetry.CustomData) error {
-
-	fmt.Printf("===github token: %s===\n", config.GithubToken)
-
 	cpe := piperenv.CPEMap{}
 
 	err := cpe.LoadFromDisk(path.Join(GeneralConfig.EnvRootPath, "commonPipelineEnvironment"))
@@ -60,9 +57,19 @@ func readPipelineEnv(config readPipelineEnvOptions, _ *telemetry.CustomData) err
 		return err
 	}
 
-	encoder := json.NewEncoder(os.Stdout)
-	encoder.SetIndent("", "\t")
-	if err := encoder.Encode(cpe); err != nil {
+	// encoder := json.NewEncoder(os.Stdout)
+	b, err := json.MarshalIndent(&cpe, "", "\t")
+	if err != nil {
+		return err
+	}
+	fmt.Printf("===cpe: %s\n", string(b))
+	// encoder.SetIndent("", "\t")
+	// if err := encoder.Encode(cpe); err != nil {
+	// return err
+	// }
+
+	_, err = os.Stdout.Write(b)
+	if err != nil {
 		return err
 	}
 
