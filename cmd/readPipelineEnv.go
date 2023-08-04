@@ -70,7 +70,7 @@ func runReadPipelineEnv(config readPipelineEnvOptions) error {
 
 // ShellExecuteCommand Step executes defined script
 func ReadPipelineEnv() *cobra.Command {
-	const STEP_NAME = "shellExecute"
+	const STEP_NAME = "readPipelineEnv"
 
 	metadata := readPipelineEnvMetadata()
 	var stepConfig readPipelineEnvOptions
