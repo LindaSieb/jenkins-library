@@ -11,14 +11,15 @@ import (
 	"github.com/SAP/jenkins-library/pkg/config"
 	"github.com/SAP/jenkins-library/pkg/log"
 	"github.com/SAP/jenkins-library/pkg/piperenv"
+	"github.com/SAP/jenkins-library/pkg/telemetry"
 	"github.com/SAP/jenkins-library/pkg/validation"
 )
 
-type readPipelineEnvOptions struct {
+type readPipelineEnvOptions1 struct {
 	GithubToken string `json:"githubToken,omitempty"`
 }
 
-func addReadPipelineEnvFlags(cmd *cobra.Command, stepConfig *readPipelineEnvOptions) {
+func addReadPipelineEnvFlags1(cmd *cobra.Command, stepConfig *readPipelineEnvOptions) {
 	cmd.Flags().StringVar(&stepConfig.GithubToken, "githubToken", os.Getenv("PIPER_githubToken"), "GitHub personal access token as per https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line")
 }
 
@@ -48,9 +49,9 @@ func addReadPipelineEnvFlags(cmd *cobra.Command, stepConfig *readPipelineEnvOpti
 // 	}
 // }
 
-func runReadPipelineEnv(config readPipelineEnvOptions) error {
+func readPipelineEnv(config readPipelineEnvOptions, _ *telemetry.CustomData) error {
 
-	fmt.Printf("===github token: %s\n===", config.GithubToken)
+	fmt.Printf("===github token: %s===\n", config.GithubToken)
 
 	cpe := piperenv.CPEMap{}
 
@@ -69,7 +70,7 @@ func runReadPipelineEnv(config readPipelineEnvOptions) error {
 }
 
 // ShellExecuteCommand Step executes defined script
-func ReadPipelineEnv() *cobra.Command {
+func ReadPipelineEnv1() *cobra.Command {
 	const STEP_NAME = "readPipelineEnv"
 
 	metadata := readPipelineEnvMetadata()
@@ -113,10 +114,10 @@ func ReadPipelineEnv() *cobra.Command {
 			}
 			log.DeferExitHandler(handler)
 			defer handler()
-			err := runReadPipelineEnv(stepConfig)
-			if err != nil {
-				log.Entry().Fatalf("error when writing reading Pipeline environment: %v", err)
-			}
+			// err := runReadPipelineEnv(stepConfig)
+			// if err != nil {
+			// 	log.Entry().Fatalf("error when writing reading Pipeline environment: %v", err)
+			// }
 			log.Entry().Info("SUCCESS")
 		},
 	}
@@ -126,7 +127,7 @@ func ReadPipelineEnv() *cobra.Command {
 }
 
 // retrieve step metadata
-func readPipelineEnvMetadata() config.StepData {
+func readPipelineEnvMetadata1() config.StepData {
 	var theMetaData = config.StepData{
 		Metadata: config.StepMetadata{
 			Name:        "readPipelineEnv",

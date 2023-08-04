@@ -178,7 +178,7 @@ func Execute() {
 	rootCmd.AddCommand(TransportRequestDocIDFromGitCommand())
 	rootCmd.AddCommand(TransportRequestReqIDFromGitCommand())
 	rootCmd.AddCommand(WritePipelineEnv())
-	rootCmd.AddCommand(ReadPipelineEnv())
+	rootCmd.AddCommand(ReadPipelineEnvCommand())
 	rootCmd.AddCommand(InfluxWriteDataCommand())
 	rootCmd.AddCommand(AbapEnvironmentRunAUnitTestCommand())
 	rootCmd.AddCommand(CheckStepActiveCommand())
