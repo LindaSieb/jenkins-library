@@ -208,12 +208,6 @@ void credentialWrapper(config, List credentialInfo, body) {
                         error("invalid credential type: ${cred.type}")
                 }
             }
-
-            // ***
-            def appRoleID = System.getenv("PIPER_vaultAppRoleID")
-            def appRoleSecretID = System.getenv("PIPER_vaultAppRoleSecretID")
-            echo "===appRoleID: ${appRoleID}"
-            echo "===appRoleSecretID: ${appRoleSecretID}"
         }
 
         // remove credentialIds that were probably defaulted and which are not present in jenkins
@@ -230,6 +224,13 @@ void credentialWrapper(config, List credentialInfo, body) {
             }
         } else {
             withCredentials(creds) {
+                // ***
+                echo "===creds: ${creds}"
+                def appRoleID = System.getenv("PIPER_vaultAppRoleID")
+                def appRoleSecretID = System.getenv("PIPER_vaultAppRoleSecretID")
+                echo "===appRoleID: ${appRoleID}"
+                echo "===appRoleSecretID: ${appRoleSecretID}"
+                
                 body()
             }
         }
