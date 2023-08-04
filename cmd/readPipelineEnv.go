@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 	"path"
 
@@ -62,7 +61,7 @@ func readPipelineEnv(config readPipelineEnvOptions, _ *telemetry.CustomData) err
 	if err != nil {
 		return err
 	}
-	fmt.Printf("===cpe: %s\n", string(b))
+	// fmt.Printf("===cpe: %s\n", string(b))
 	// encoder.SetIndent("", "\t")
 	// if err := encoder.Encode(cpe); err != nil {
 	// return err

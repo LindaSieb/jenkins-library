@@ -12,7 +12,7 @@ void call(Map parameters = [:]) {
     
     def output = script.sh(returnStdout: true, script: "${piperGoPath} readPipelineEnv")
     // ***
-    echo "===cpe (output): ${output}"
+    // echo "===cpe (output): ${output}"
 
     Map cpeMap = script.readJSON(text: output)
     script?.commonPipelineEnvironment?.setCPEMap(script, cpeMap)
