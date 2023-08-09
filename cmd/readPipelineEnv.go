@@ -56,21 +56,21 @@ func readPipelineEnv(config readPipelineEnvOptions, _ *telemetry.CustomData) err
 		return err
 	}
 
-	// encoder := json.NewEncoder(os.Stdout)
-	b, err := json.MarshalIndent(&cpe, "", "\t")
-	if err != nil {
-		return err
-	}
-	// fmt.Printf("===cpe: %s\n", string(b))
-	// encoder.SetIndent("", "\t")
-	// if err := encoder.Encode(cpe); err != nil {
+	encoder := json.NewEncoder(os.Stdout)
+	// b, err := json.MarshalIndent(&cpe, "", "\t")
+	// if err != nil {
 	// return err
 	// }
-
-	_, err = os.Stdout.Write(b)
-	if err != nil {
+	// fmt.Printf("===cpe: %s\n", string(b))
+	encoder.SetIndent("", "\t")
+	if err := encoder.Encode(cpe); err != nil {
 		return err
 	}
+
+	// _, err = os.Stdout.Write(b)
+	// if err != nil {
+	// 	return err
+	// }
 
 	return nil
 }
