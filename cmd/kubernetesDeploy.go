@@ -59,8 +59,9 @@ func runKubernetesDeploy(config kubernetesDeployOptions, telemetryData *telemetr
 }
 
 func runHelmDeploy(config kubernetesDeployOptions, utils kubernetes.DeployUtils, stdout io.Writer) error {
+	log.Entry().Debugf("here is all the configuration 11111111 %v", config)
 	if len(config.ChartPath) <= 0 {
-		return fmt.Errorf("chart path has not been set, please configure chartPath parameter")
+		return fmt.Errorf("chart path has not been set, please configure chartPath parameter. You set it as '#{config.ChartPath}'")
 	}
 	if len(config.DeploymentName) <= 0 {
 		return fmt.Errorf("deployment name has not been set, please configure deploymentName parameter")
