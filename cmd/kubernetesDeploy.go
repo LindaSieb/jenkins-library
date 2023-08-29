@@ -112,6 +112,7 @@ func runHelmDeploy(config kubernetesDeployOptions, utils kubernetes.DeployUtils,
 	if len(config.ContainerRegistryUser) == 0 && len(config.ContainerRegistryPassword) == 0 {
 		log.Entry().Info("TEST TEST LINDA LINDA No/incomplete container registry credentials provided: skipping secret creation")
 		if len(config.ContainerRegistrySecret) > 0 {
+			log.Entry().Info("there was a container registry secret 000000000000000000000")
 			helmValues.add("imagePullSecrets[0].name", config.ContainerRegistrySecret)
 		}
 	} else {
