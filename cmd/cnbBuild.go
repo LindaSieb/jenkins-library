@@ -192,6 +192,7 @@ func ensureDockerConfig(config *cnbBuildOptions, utils cnbutils.BuildUtils) erro
 		return utils.FileWrite(config.DockerConfigJSON, []byte("{}"), os.ModePerm)
 	}
 
+	log.Entry().Infof("THIS IS THE NEW PIPER BRANCH!!!!!!!!!!!")
 	log.Entry().Debugf("Copying docker config file from '%s' to '%s'", config.DockerConfigJSON, newFile)
 	_, err := utils.Copy(config.DockerConfigJSON, newFile)
 	if err != nil {
